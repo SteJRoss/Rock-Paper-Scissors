@@ -1,32 +1,38 @@
-//Sets up variables
+// Sets up variables
 let playerSelection;
 let computerSelection;
 
 let userScore = 0;
 let compScore = 0;
 
+// Creates Container Div on the Fly (DOESN'T WORK YET)
+const createContainer = () => {
+const container = document.createElement('div');
+const controls = document.getElementsByClassName('.controls');
+container.style.cssText = 'color: red; background: white;';
+container.setAttribute('id', 'container');
+controls.appendChild(container);
+}
 
-//Buttons
+// Buttons
 const start = document.querySelector('#start_btn');
 const rock = document.querySelector('#rock_btn');
 const paper = document.querySelector('#paper_btn');
 const scissors = document.querySelector('#scissors_btn');
 
-
-//DOM Manipulation
+// DOM Manipulation
 const output = document.querySelector('.output');
 const userScoreOutput = document.createElement('p');
 const compScoreOutput = document.createElement('p');
 const resultOutput = document.createElement('p');
 
-
-//Event Listeners
+// Event Listeners
 rock.addEventListener('click', playRound);
 paper.addEventListener('click', playRound);
 scissors.addEventListener('click', playRound);
 
 
-//Functions
+// Functions
 
 // Randomly returns either 'Rock', 'Paper' or 'Scissors'
 function computerPlay(){
@@ -34,7 +40,7 @@ function computerPlay(){
     return options[Math.floor(Math.random() * options.length)];
 }
 
-//Deletes Output and Creates New Game
+// Deletes Output and Re-starts Game
 const deleteData = () => {
     userScore = 0;
     compScore = 0;
@@ -46,6 +52,7 @@ const deleteData = () => {
 start.addEventListener('click', deleteData);
 
 
+// Plays Game
 function playRound(playerSelection, computerSelection){
    
     computerSelection = computerPlay();
