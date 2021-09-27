@@ -17,7 +17,7 @@ const scissors = document.querySelector('#scissors_btn');
 const output = document.querySelector('.output');
 const userScoreOutput = document.createElement('p');
 const compScoreOutput = document.createElement('p');
-const resultOutput = document.createElement('p')
+const resultOutput = document.createElement('p');
 
 
 //Event Listeners
@@ -34,20 +34,34 @@ function computerPlay(){
     return options[Math.floor(Math.random() * options.length)];
 }
 
+//Deletes Output and Creates New Game
+const deleteData = () => {
+    userScore = 0;
+    compScore = 0;
+    output.removeChild(userScoreOutput);
+    output.removeChild(compScoreOutput);
+    output.removeChild(resultOutput);    
+}
+
+start.addEventListener('click', deleteData);
+
 
 function playRound(playerSelection, computerSelection){
-    
+   
     computerSelection = computerPlay();
     playerSelection = this.id;
     
         if (playerSelection == 'rock_btn'){
+            
             if (computerSelection == 'Rock'){
                 userScoreOutput.textContent = "Your Score: " + userScore;
                 compScoreOutput.textContent = "Computer Score: " + compScore;
                 resultOutput.textContent = 'Draw';
+                
                 output.appendChild(userScoreOutput);
                 output.appendChild(compScoreOutput);
                 output.appendChild(resultOutput);
+                
             }
                 else if (computerSelection == 'Paper'){
                     compScore = compScore + 1;
@@ -136,7 +150,7 @@ function playRound(playerSelection, computerSelection){
                 if (userScore >= 5){
                                     compScore = 0;
                                     userScore = 0;
-                                    resultOutput.textContent = 'CONGRATULATIONS! YOU ARE VICTORIOUS!';
+                                    resultOutput.textContent = 'CONGRATULATIONS! YOU ARE VICTORIOUS! Chose a new weapon above to fight again!';
                                     output.removeChild(userScoreOutput);
                                     output.removeChild(compScoreOutput);
                                     output.appendChild(resultOutput);
@@ -144,7 +158,7 @@ function playRound(playerSelection, computerSelection){
                                 if (compScore >= 5){
                                     compScore = 0;
                                     userScore = 0;
-                                    resultOutput.textContent = 'BAD LUCK! TRY AGAIN, VICTORY IS IN SIGHT...';
+                                    resultOutput.textContent = 'BAD LUCK! TRY AGAIN, VICTORY IS IN SIGHT... Chose a new weapon above to start a new game!';
                                     output.removeChild(userScoreOutput);
                                     output.removeChild(compScoreOutput);
                                     output.appendChild(resultOutput);
@@ -153,14 +167,3 @@ function playRound(playerSelection, computerSelection){
 
     }
 
-//Deletes Output and Creates New Game
-const deleteData = () => {
-    output.removeChild(userScoreOutput);
-    output.removeChild(compScoreOutput);
-    output.removeChild(resultOutput);
-    userScore = 0;
-    compScore = 0;
-     
-}
-
-start.addEventListener('click', deleteData);
